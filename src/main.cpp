@@ -7,9 +7,6 @@
 #include <button.h>
 #include <encoder.h>
 
-// list of modes
-
-
 // init onboard devices
 screen_t screen(PIN_SCREEN_RST);
 encoder_t enc;
@@ -50,6 +47,12 @@ void setup()
 
 void loop()
 {
+  if (btn_m.read())
+  {
+    Serial.print("Mode change");
+    action_current=(action_current+1)%ACTIONS_CNT;
+  }
+
   for (size_t ii=0; ii < BTNS_CNT; ++ii)
   {
     if (btns[ii].read())
